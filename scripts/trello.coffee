@@ -8,17 +8,17 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-module.exports = (robot) ->
-  robot.hear /^todo (.*)/i, (msg) ->
-    title = "#{msg.match[1]}"
+Trello = require("node-trello")
 
-    Trello = require("node-trello")
-    t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN)
-    t.post "/1/cards", {name: title, idList: process.env.HUBOT_TRELLO_LIST}, (err, data) ->
-      if err
-        msg.send "ERROR"
-        return
-      msg.send "「#{title}」 をTrelloに保存しました"
+module.exports = (robot) ->
+    robot.hear /^todo (.*)/i, (msg) ->
+        title = "#{msg.match[1]}"
+        trello = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN)
+        trello.post "/1/cards", {name: title, idList: process.env.HUBOT_TRELLO_TODO}, (err, data) ->
+          if err 
+            msg.send "保存に失敗しました"
+            return
+          msg.send "「#{title}」 をTrelloのToDoボードに保存しました"
 
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
