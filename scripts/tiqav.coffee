@@ -1,25 +1,16 @@
-# Description
-#   A Hubot script for choosing at random
-#  
+# Description:
+#   tiqav から画像を返す
+#
 # Configuration:
-#   None
+#   HUBOT_TIQAV_404_MESSAGE - 画像がなかった場合のメッセージ
+#   HUBOT_TIQAV_ERROR_MESSAGE - エラーが発生した場合のメッセージ
 #
 # Commands:
-#   <item1>、<item2>、<item3>から選んで - choose at random
+#   hubot tiqav - tiqav から画像をランダムで返す
+#   hubot tiqav <query> - tiqav から <query> で検索した画像を返す
 #
 # Author:
-#   bouzuya <m@bouzuya.net>
-
-#module.exports = (robot) ->
-#  robot.hear /neta (.*)/i, (msg) ->
-#    request = require('request');
-#    request.get("http://api.tiqav.com/search.json?q=#{msg.match[1]}", (error, response, body) ->
-#      if error or response.statusCode != 200
-#        return msg.send('画像検索に失敗しました...')
-#      data = JSON.parse(body)[0]
-#      # robot.logger.info data
-#      msg.send "http://img.tiqav.com/#{data.id}.#{data.ext}" )
-
+#   moqada
 
 module.exports = (robot) ->
   robot.hear /neta( (.*))?/i, (msg) ->
@@ -43,17 +34,3 @@ module.exports = (robot) ->
         image = msg.random images
         msg.send "http://img.tiqav.com/#{image.id}.#{image.ext}"
 
-
-#module.exports = (robot) ->
-#  robot.hear /ぬるぽ/, (msg) ->
-#    msg.send """
-#```
-#   Λ＿Λ     ＼＼
-#（  ・∀・）  | | ｶﾞｯ
-# と     ）  | |
-#  Ｙ /ノ     人
-#   / ）    < >   _Λ  ∩
-#＿/し'   ／／  Ｖ｀Д´）/
-#（＿フ彡             / ←>> @#{msg.message.user.name}
-#```
-#  """
