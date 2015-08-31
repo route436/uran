@@ -10,15 +10,39 @@
 # Author:
 #   bouzuya <m@bouzuya.net>
 
+#module.exports = (robot) ->
+#  robot.hear /neta (.*)/i, (msg) ->
+#    request = require('request');
+#    request.get("http://api.tiqav.com/search.json?q=#{msg.match[1]}", (error, response, body) ->
+#      if error or response.statusCode != 200
+#        return msg.send('画像検索に失敗しました...')
+#      data = JSON.parse(body)[0]
+#      # robot.logger.info data
+#      msg.send "http://img.tiqav.com/#{data.id}.#{data.ext}" )
+
+
 module.exports = (robot) ->
-  robot.hear /neta (.*)/i, (msg) ->
-    request = require('request');
-    request.get("http://api.tiqav.com/search.json?q=#{msg.match[2]}", (error, response, body) ->
-      if error or response.statusCode != 200
-        return msg.send('画像検索に失敗しました...')
-      data = JSON.parse(body)[0]
-      # robot.logger.info data
-      msg.send "http://img.tiqav.com/#{data.id}.#{data.ext}" )
+  robot.respond /neta( (.*))?/i, (msg) ->
+    query = msg.match[2]
+    if query
+      imageMe msg, 'http://api.tiqav.com/search.json', {q: query}
+    else
+      imageMe msg, 'http://api.tiqav.com/search/random.json'
+
+  imageMe = (msg, url, query)->
+    http = msg.http url
+    if query
+      http = http.query query
+    http.get() (err, res, body) ->
+      if res.statusCode is 404
+        msg.send process.env.HUBOT_TIQAV_404_MESSAGE or "画像ない"
+      else if res.statusCode isnt 200
+        msg.send process.env.HUBOT_TIQAV_ERROR_MESSAGE or "エラーっぽい"
+      else
+        images = JSON.parse body
+        image = msg.random images
+        msg.send "http://img.tiqav.com/#{image.id}.#{image.ext}"
+
 
 #module.exports = (robot) ->
 #  robot.hear /ぬるぽ/, (msg) ->
