@@ -11,7 +11,7 @@
 #   bouzuya <m@bouzuya.net>
 
 module.exports = (robot) ->
-  robot.hear /ちくわ (.*)/i, (msg) ->
+  robot.hear /neta (.*)/i, (msg) ->
     request = require('request');
     request.get("http://api.tiqav.com/search.json?q=#{msg.match[1]}", (error, response, body) ->
       if error or response.statusCode != 200
