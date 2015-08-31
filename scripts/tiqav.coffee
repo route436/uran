@@ -22,7 +22,7 @@
 
 
 module.exports = (robot) ->
-  robot.respond /neta( (.*))?/i, (msg) ->
+  robot.hear /neta( (.*))?/i, (msg) ->
     query = msg.match[2]
     if query
       imageMe msg, 'http://api.tiqav.com/search.json', {q: query}
