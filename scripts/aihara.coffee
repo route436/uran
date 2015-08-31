@@ -12,7 +12,7 @@
 
 module.exports = (robot) ->
   robot.hear /ぱらさん/i, (msg) ->
-    msg.send msg.random ["うんこ味のカレーか、カレー味のうんこなら、うんこ味のうんこを選ぶらしいですよ！変態ですね！！", "私のご主人様です", "おかずは私のマ●カスです。", "だましたんですか！", "富士通でも日立でもなく、ウチ（＝KSS）の製品なんでそのまま受け取ってもらうしかないんですわ！", "いっしょに汗かこうや！！"]
+    msg.send msg.random ["https://www1.doshisha.ac.jp/~ofeldman/photos/09.-Kimata-1.jpg", "https://www1.doshisha.ac.jp/~ofeldman/photos/12.-Fukushima-1.jpg", "メシウマですわー！！", "だましたんですか！", "富士通でも日立でもなく、ウチ（＝KSS）の製品なんでそのまま受け取ってもらうしかないんですわ！", "いっしょに汗かこうや！！"]
 
 #module.exports = (robot) ->
 #  robot.hear /ぬるぽ/, (msg) ->
