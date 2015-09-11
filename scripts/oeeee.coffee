@@ -54,4 +54,4 @@ oe2="""
 ```
 """
   robot.hear /オエ/i, (msg) ->
-    msg.send msg.random [oe1,oe2]
+    msg.send oe1
