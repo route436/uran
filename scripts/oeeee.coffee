@@ -8,8 +8,8 @@
 #   ネタ/ジョーク系のbot全般
 
 module.exports = (robot) ->
-  robot.hear /オエ/, (msg) ->
-    msg.send msg.random[ """
+  robot.hear /オエ/i, (msg) ->
+    msg.send msg.random [ """
 ```
 　　 ／￣￣＼　ﾑｼｬﾑｼｬ
 　　/　 ●/￣￣＼
