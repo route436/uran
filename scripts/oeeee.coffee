@@ -8,8 +8,7 @@
 #   ネタ/ジョーク系のbot全般
 
 module.exports = (robot) ->
-  robot.hear /オエ/i, (msg) ->
-    msg.send msg.random ["""
+oe1 = """
 ```
 　　 ／￣￣＼　ﾑｼｬﾑｼｬ
 　　/　 ●/￣￣＼
@@ -33,7 +32,7 @@ module.exports = (robot) ->
 　　　　　　　　 Ｕ
 ```
 """
-"""
+oe2="""
 ```
 　　　　　　三 こ駄 三
 　　　　　　三 ら目 三
@@ -53,4 +52,6 @@ module.exports = (robot) ->
 　　　　／　 ヽ|／Ｕ
 　　　　　　ｕ
 ```
-  """]
+"""
+  robot.hear /オエ/i, (msg) ->
+    msg.send msg.random oe1,oe2
